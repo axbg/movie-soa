@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface UserMetaRepository extends CrudRepository<UserMeta, Integer> {
     Optional<UserMeta> findByUsernameAndPassword(String username, String password);
+    Optional<UserMeta> findByUsername(String username);
+    Optional<UserMeta> findByToken(String token);
 }

@@ -16,6 +16,9 @@ public class UserMeta {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String token;
+
     public UserMeta(){
 
     }
@@ -24,6 +27,7 @@ public class UserMeta {
         this.username = username;
         //hashpassword
         this.password = password;
+        this.token = "asdsdfsdfdfd";
     }
 
     public Integer getId() {
@@ -50,5 +54,9 @@ public class UserMeta {
     private String encodePassword(String password){
         //implement later
         return password;
+    }
+
+    public String getToken() {
+        return token;
     }
 }
