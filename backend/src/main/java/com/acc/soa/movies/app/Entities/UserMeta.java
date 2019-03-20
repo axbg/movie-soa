@@ -2,12 +2,13 @@ package com.acc.soa.movies.app.Entities;
 
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 public class UserMeta {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(nullable = false, unique = true)
@@ -19,15 +20,14 @@ public class UserMeta {
     @Column(nullable = false)
     private String token;
 
-    public UserMeta(){
+    public UserMeta() {
 
     }
 
     public UserMeta(String username, String password) {
         this.username = username;
-        //hashpassword
-        this.password = password;
-        this.token = "asdsdfsdfdfd";
+        this.password = UserMeta.encodePassword(password);
+        this.token = UUID.randomUUID().toString();
     }
 
     public Integer getId() {
@@ -47,12 +47,11 @@ public class UserMeta {
     }
 
     public void setPassword(String password) {
-        //hash password
-        this.password = password;
+        this.password = UserMeta.encodePassword(password);
     }
 
-    private String encodePassword(String password){
-        //implement later
+    private static String encodePassword(String password) {
+        //implement hashing algorithm
         return password;
     }
 
