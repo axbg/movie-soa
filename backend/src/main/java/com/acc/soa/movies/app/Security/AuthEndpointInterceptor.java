@@ -1,5 +1,6 @@
 package com.acc.soa.movies.app.Security;
 
+import com.acc.soa.movies.app.Endpoints.AuthEndpoint;
 import com.acc.soa.movies.app.Entities.UserMeta;
 import com.acc.soa.movies.app.Repositories.UserMetaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.ws.WebServiceMessage;
 import org.springframework.ws.client.WebServiceFaultException;
 import org.springframework.ws.context.MessageContext;
 import org.springframework.ws.server.EndpointInterceptor;
+import org.springframework.ws.server.endpoint.MethodEndpoint;
 import org.springframework.ws.soap.SoapHeader;
 import org.springframework.ws.soap.SoapMessage;
 import org.w3c.dom.Node;
@@ -25,22 +27,26 @@ public class AuthEndpointInterceptor implements EndpointInterceptor {
     @Override
     public boolean handleRequest(MessageContext messageContext, Object o) throws Exception {
 
-        SoapHeader header =
-                ((SoapMessage) ((WebServiceMessage) messageContext.getRequest())).getSoapHeader();
+        MethodEndpoint endpoint = (MethodEndpoint) o;
 
-        Source bodySource = header.getSource();
-        DOMSource bodyDomSource = (DOMSource) bodySource;
-        Node bodyNode = bodyDomSource.getNode();
+        if (endpoint.getMethod().getDeclaringClass() != AuthEndpoint.class) {
+            SoapHeader header =
+                    ((SoapMessage) ((WebServiceMessage) messageContext.getRequest())).getSoapHeader();
 
-        String token = bodyNode.getTextContent().trim();
+            Source bodySource = header.getSource();
+            DOMSource bodyDomSource = (DOMSource) bodySource;
+            Node bodyNode = bodyDomSource.getNode();
 
-        Optional<UserMeta> user = this.userMetaRepository.findByToken(token);
+            String token = bodyNode.getTextContent().trim();
 
-        if (user.isPresent()) {
-            UserMeta realUser = user.get();
-            messageContext.setProperty("user", realUser.getUsername());
-        } else {
-            throw new WebServiceFaultException("Token is not valid!");
+            Optional<UserMeta> user = this.userMetaRepository.findByToken(token);
+
+            if (user.isPresent()) {
+                UserMeta realUser = user.get();
+                messageContext.setProperty("user", realUser.getUsername());
+            } else {
+                throw new WebServiceFaultException("Token is not valid!");
+            }
         }
 
         return true;
