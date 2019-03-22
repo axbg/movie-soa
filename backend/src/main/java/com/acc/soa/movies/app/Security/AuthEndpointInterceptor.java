@@ -44,6 +44,7 @@ public class AuthEndpointInterceptor implements EndpointInterceptor {
             if (user.isPresent()) {
                 UserMeta realUser = user.get();
                 messageContext.setProperty("user", realUser.getUsername());
+                messageContext.setProperty("user_id", realUser.getId());
             } else {
                 throw new WebServiceFaultException("Token is not valid!");
             }

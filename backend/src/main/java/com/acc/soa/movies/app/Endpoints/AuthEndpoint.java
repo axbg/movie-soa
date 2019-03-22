@@ -32,8 +32,8 @@ public class AuthEndpoint {
     @ResponsePayload
     public LoginResponse loginResponse(@RequestPayload LoginRequest request,
                                        MessageContext messageContext) {
-        //System.out.println(messageContext.getProperty("user"));
         LoginResponse response = new LoginResponse();
+
         Optional<UserMeta> findUser =
                 userMetaRepository.findByUsernameAndPassword(request.getUser().getUsername(),
                         request.getUser().getPassword());

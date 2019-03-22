@@ -10,7 +10,6 @@ package com.acc.soa.movies.app.SOAPEntities;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -25,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="added" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +35,27 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "title"
+    "added"
 })
-@XmlRootElement(name = "getMoviesByNameRequest")
-public class GetMoviesByNameRequest {
+@XmlRootElement(name = "saveMovieToCollectionResponse")
+public class SaveMovieToCollectionResponse {
 
-    @XmlElement(required = true)
-    protected String title;
+    protected boolean added;
 
     /**
-     * Gets the value of the title property.
+     * Gets the value of the added property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
      */
-    public String getTitle() {
-        return title;
+    public boolean isAdded() {
+        return added;
     }
 
     /**
-     * Sets the value of the title property.
+     * Sets the value of the added property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
      */
-    public void setTitle(String value) {
-        this.title = value;
+    public void setAdded(boolean value) {
+        this.added = value;
     }
 
 }

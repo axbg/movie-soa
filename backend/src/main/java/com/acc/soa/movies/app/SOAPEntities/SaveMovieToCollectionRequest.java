@@ -8,6 +8,7 @@
 
 package com.acc.soa.movies.app.SOAPEntities;
 
+import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -25,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="title" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="movie_id" type="{http://www.w3.org/2001/XMLSchema}integer"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +37,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "title"
+    "movieId"
 })
-@XmlRootElement(name = "getMoviesByNameRequest")
-public class GetMoviesByNameRequest {
+@XmlRootElement(name = "saveMovieToCollectionRequest")
+public class SaveMovieToCollectionRequest {
 
-    @XmlElement(required = true)
-    protected String title;
+    @XmlElement(name = "movie_id", required = true)
+    protected BigInteger movieId;
 
     /**
-     * Gets the value of the title property.
+     * Gets the value of the movieId property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link BigInteger }
      *     
      */
-    public String getTitle() {
-        return title;
+    public BigInteger getMovieId() {
+        return movieId;
     }
 
     /**
-     * Sets the value of the title property.
+     * Sets the value of the movieId property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link BigInteger }
      *     
      */
-    public void setTitle(String value) {
-        this.title = value;
+    public void setMovieId(BigInteger value) {
+        this.movieId = value;
     }
 
 }

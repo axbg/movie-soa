@@ -67,6 +67,11 @@
 			<version>0.7.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20180813</version>
+		</dependency>
 
 	</dependencies>
 
@@ -90,7 +95,7 @@
 				</executions>
 				<configuration>
 					<schemaDirectory>${project.basedir}/src/main/resources/</schemaDirectory>
-					<schemaFiles>movies-schema.xsd</schemaFiles>
+					<schemaFiles>app-schema.xsd</schemaFiles>
 					<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
 					<packageName>com.acc.soa.movies.app.SOAPEntities</packageName>
 					<clearOutputDir>false</clearOutputDir>

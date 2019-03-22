@@ -1,0 +1,149 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+           xmlns:tns="http://movies-soa.com/app" targetNamespace="http://movies-soa.com/app">
+
+    <!--- types -->
+    <xs:complexType name="movie">
+        <xs:sequence>
+            <xs:element name="movie_id" type="xs:integer"/>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="tagline" type="xs:string"/>
+            <xs:element name="year" type="xs:integer"/>
+            <xs:element name="photo" type="xs:string"/>
+            <xs:element name="rating" type="xs:float"/>
+            <xs:element name="director" type="xs:string"/>
+            <xs:element name="genres">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="genre" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="actors">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="actor" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="authenticatedUser">
+        <xs:sequence>
+            <xs:element name="username" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+            <xs:element name="token" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="user">
+        <xs:sequence>
+            <xs:element name="username" type="xs:string"/>
+            <xs:element name="password" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--elements-->
+    <xs:element name="movie" type="tns:movie"/>
+
+    <xs:element name="movies">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="movie" type="tns:movie"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="user" type="tns:user"/>
+
+    <xs:element name="authenticatedUser" type="tns:authenticatedUser"/>
+
+    <!--SOAP Actions -->
+
+    <!-- works as register request also -->
+    <xs:element name="loginRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user" type="tns:user"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="loginResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="authenticatedUser" type="tns:authenticatedUser"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getMovieByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="movie_id" type="xs:integer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getMovieByIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:movie"/>
+                <xs:element name="added" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getMoviesByNameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="title" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getMoviesByNameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:movies"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPopularMovieRequest"/>
+
+    <xs:element name="getPopularMovieResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:movies"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="saveMovieToCollectionRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="movie_id" type="xs:integer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="saveMovieToCollectionResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="added" type="xs:boolean"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getPersonalMoviesRequest"/>
+
+    <xs:element name="getPersonalMoviesResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:movie" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>
