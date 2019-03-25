@@ -9,26 +9,41 @@ public class MovieMeta {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    private Integer tnmb_id;
+    private Integer tnmb;
+
+    private String name;
 
     @ManyToOne
     private UserMeta owner;
 
-    public MovieMeta(Integer tnmb_id, UserMeta owner) {
-        this.tnmb_id = tnmb_id;
+    public MovieMeta(){
+
+    }
+
+    public MovieMeta(Integer tnmb, UserMeta owner, String name) {
+        this.tnmb = tnmb;
         this.owner = owner;
+        this.name = name;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public Integer getTnmb_id() {
-        return tnmb_id;
+    public Integer getTnmb() {
+        return tnmb;
     }
 
-    public void setTnmb_id(Integer tnmb_id) {
-        this.tnmb_id = tnmb_id;
+    public void setTnmb(Integer tnmb) {
+        this.tnmb = tnmb;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public UserMeta getOwner() {

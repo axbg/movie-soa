@@ -1,19 +1,25 @@
 package com.acc.soa.movies.app.Utils;
 
+import org.springframework.ws.client.WebServiceFaultException;
+
 import javax.net.ssl.HttpsURLConnection;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class HTTPManager implements Constants {
 
-    public static String HTTPRequest(String URL) {
+    public static String HTTPRequest(String[] params) {
         StringBuilder sb = new StringBuilder();
         try {
-            URL url = new URL(Constants.TMDB_API + URL + Constants.TMDB_KEY);
+            URL url;
+            if (params.length == 1) {
+                url = new URL(Constants.TMDB_API + params[0] + Constants.TMDB_KEY);
+            } else {
+                url = new URL(Constants.TMDB_API + params[0] + Constants.TMDB_KEY +
+                        params[1]);
+            }
+
             HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
             InputStream is = connection.getInputStream();
             InputStreamReader isr = new InputStreamReader(is);
@@ -26,10 +32,8 @@ public class HTTPManager implements Constants {
             }
 
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new WebServiceFaultException("URL is not valid!");
         }
 
         return sb.toString();

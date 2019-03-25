@@ -12,21 +12,21 @@ import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for meta_movie complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
+ * &lt;complexType name="meta_movie">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="movie_id" type="{http://www.w3.org/2001/XMLSchema}integer"/>
+ *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="tnmb" type="{http://www.w3.org/2001/XMLSchema}integer"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,37 +36,63 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-    "movieId"
+@XmlType(name = "meta_movie", propOrder = {
+    "name",
+    "tnmb"
 })
-@XmlRootElement(name = "saveMovieToCollectionRequest")
-public class SaveMovieToCollectionRequest {
+public class MetaMovie {
 
-    @XmlElement(name = "movie_id", required = true)
-    protected BigInteger movieId;
+    @XmlElement(required = true)
+    protected String name;
+    @XmlElement(required = true)
+    protected BigInteger tnmb;
 
     /**
-     * Gets the value of the movieId property.
+     * Gets the value of the name property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the value of the name property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setName(String value) {
+        this.name = value;
+    }
+
+    /**
+     * Gets the value of the tnmb property.
      * 
      * @return
      *     possible object is
      *     {@link BigInteger }
      *     
      */
-    public BigInteger getMovieId() {
-        return movieId;
+    public BigInteger getTnmb() {
+        return tnmb;
     }
 
     /**
-     * Sets the value of the movieId property.
+     * Sets the value of the tnmb property.
      * 
      * @param value
      *     allowed object is
      *     {@link BigInteger }
      *     
      */
-    public void setMovieId(BigInteger value) {
-        this.movieId = value;
+    public void setTnmb(BigInteger value) {
+        this.tnmb = value;
     }
 
 }

@@ -20,6 +20,7 @@ public class UserMeta {
     @Column(nullable = false)
     private String token;
 
+
     public UserMeta() {
 
     }

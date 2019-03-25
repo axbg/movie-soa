@@ -8,8 +8,7 @@
 
 package com.acc.soa.movies.app.SOAPEntities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -27,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://movies-soa.com/app}meta_movie" maxOccurs="unbounded"/>
+ *         &lt;element name="movie_id" type="{http://www.w3.org/2001/XMLSchema}integer"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,41 +37,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "metaMovie"
+    "movieId"
 })
-@XmlRootElement(name = "getPersonalMoviesResponse")
-public class GetPersonalMoviesResponse {
+@XmlRootElement(name = "getRecommendationsRequest")
+public class GetRecommendationsRequest {
 
-    @XmlElement(name = "meta_movie", required = true)
-    protected List<MetaMovie> metaMovie;
+    @XmlElement(name = "movie_id", required = true)
+    protected BigInteger movieId;
 
     /**
-     * Gets the value of the metaMovie property.
+     * Gets the value of the movieId property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the metaMovie property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getMetaMovie().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link MetaMovie }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link BigInteger }
+     *     
      */
-    public List<MetaMovie> getMetaMovie() {
-        if (metaMovie == null) {
-            metaMovie = new ArrayList<MetaMovie>();
-        }
-        return this.metaMovie;
+    public BigInteger getMovieId() {
+        return movieId;
+    }
+
+    /**
+     * Sets the value of the movieId property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BigInteger }
+     *     
+     */
+    public void setMovieId(BigInteger value) {
+        this.movieId = value;
     }
 
 }

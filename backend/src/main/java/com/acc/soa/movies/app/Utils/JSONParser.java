@@ -17,10 +17,20 @@ public final class JSONParser {
         movie.setMovieId(BigInteger.valueOf(jsonMovie.getInt("id")));
         movie.setTitle(jsonMovie.getString("title"));
         movie.setRating(jsonMovie.getFloat("vote_average"));
-        movie.setPhoto(Constants.PHOTO_URL + jsonMovie.getString("poster_path"));
         movie.setTagline(jsonMovie.getString("overview"));
-        movie.setYear(BigInteger.valueOf(
-                Integer.valueOf(((jsonMovie.getString("release_date")).split("-"))[0])));
+
+        try {
+            movie.setPhoto(Constants.PHOTO_URL + jsonMovie.getString("poster_path"));
+        } catch (Exception ex) {
+            movie.setPhoto("empty");
+        }
+
+        if (!jsonMovie.getString("release_date").equals("")) {
+            movie.setYear(BigInteger.valueOf(
+                    Integer.valueOf(((jsonMovie.getString("release_date")).split("-"))[0])));
+        } else {
+            movie.setYear(BigInteger.valueOf(0));
+        }
 
         return movie;
     }
@@ -46,7 +56,9 @@ public final class JSONParser {
         JSONObject root = new JSONObject(json);
         JSONArray jsonMovies = root.getJSONArray("results");
 
-        for (int i = 0; i < 9; i++) {
+        int limitResults = jsonMovies.length() > 10 ? 10 : jsonMovies.length();
+
+        for (int i = 0; i < limitResults; i++) {
             JSONObject jsonMovie = jsonMovies.getJSONObject(i);
             movieList.add(parseMovieJSON(jsonMovie.toString()));
         }

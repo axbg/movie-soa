@@ -8,8 +8,6 @@
 
 package com.acc.soa.movies.app.SOAPEntities;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -27,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://movies-soa.com/app}meta_movie" maxOccurs="unbounded"/>
+ *         &lt;element ref="{http://movies-soa.com/app}movies"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,41 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "metaMovie"
+    "movies"
 })
-@XmlRootElement(name = "getPersonalMoviesResponse")
-public class GetPersonalMoviesResponse {
+@XmlRootElement(name = "getRecommendationsResponse")
+public class GetRecommendationsResponse {
 
-    @XmlElement(name = "meta_movie", required = true)
-    protected List<MetaMovie> metaMovie;
+    @XmlElement(required = true)
+    protected Movies movies;
 
     /**
-     * Gets the value of the metaMovie property.
+     * Gets the value of the movies property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the metaMovie property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getMetaMovie().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link MetaMovie }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link Movies }
+     *     
      */
-    public List<MetaMovie> getMetaMovie() {
-        if (metaMovie == null) {
-            metaMovie = new ArrayList<MetaMovie>();
-        }
-        return this.metaMovie;
+    public Movies getMovies() {
+        return movies;
+    }
+
+    /**
+     * Sets the value of the movies property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Movies }
+     *     
+     */
+    public void setMovies(Movies value) {
+        this.movies = value;
     }
 
 }

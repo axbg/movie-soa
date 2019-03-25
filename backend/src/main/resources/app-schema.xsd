@@ -2,6 +2,14 @@
            xmlns:tns="http://movies-soa.com/app" targetNamespace="http://movies-soa.com/app">
 
     <!--- types -->
+
+    <xs:complexType name="meta_movie">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="tnmb" type="xs:integer"/>
+        </xs:sequence>
+    </xs:complexType>
+
     <xs:complexType name="movie">
         <xs:sequence>
             <xs:element name="movie_id" type="xs:integer"/>
@@ -45,6 +53,8 @@
 
     <!--elements-->
     <xs:element name="movie" type="tns:movie"/>
+
+    <xs:element name="meta_movie" type="tns:meta_movie"/>
 
     <xs:element name="movies">
         <xs:complexType>
@@ -141,7 +151,23 @@
     <xs:element name="getPersonalMoviesResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="tns:movie" maxOccurs="unbounded"/>
+                <xs:element ref="tns:meta_movie" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getRecommendationsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="movie_id" type="xs:integer"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getRecommendationsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tns:movies"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
