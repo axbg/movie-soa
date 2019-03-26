@@ -1,9 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Two
+      Freshest Movies
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <ion-searchbar animated placeholder="Search your movie" [(ngModel)]="searchText" (change)="dispatchSearch()"></ion-searchbar>
+  <app-movie-list [movies]="movies"></app-movie-list>
+</ion-content>

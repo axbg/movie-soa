@@ -1,0 +1,12 @@
+<div>
+  <ion-card class="custom-card" *ngFor="let movie of movies; let index;" (click)="renderMovie(index)">
+    <ion-card-header class="custom-header">
+      <ion-img class="custom-img" [src]="movie.photo"></ion-img>
+    </ion-card-header>
+    <ion-card-title class="custom-title">
+      {{movie.name}}
+      <span class="rating">{{movie.rating}}⭐</span>
+    </ion-card-title>
+    <ion-card-content>{{movie.overview}}</ion-card-content>
+  </ion-card>
+</div>

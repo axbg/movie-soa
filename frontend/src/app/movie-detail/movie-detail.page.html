@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>movieDetail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="movie-container">
+    <div class="poster">
+      <ion-img class="photo" [src]="movie.photo"></ion-img>
+    </div>
+    <ion-fab class="custom-fab" (click)="changeCollectionStatus()">
+      <ion-fab-button>{{isAdded()}}</ion-fab-button>
+    </ion-fab>
+    <ion-card>
+      <ion-card-content>
+        <div class="info">
+          <ion-text>
+            <p><strong>Title:</strong> {{movie.name}}</p>
+          </ion-text>
+          <ion-text>
+            <p><strong>Rating:</strong> {{movie.rating}}⭐</p>
+          </ion-text>
+          <ion-text>
+            <p><strong>Year</strong>: {{movie.year}}</p>
+          </ion-text>
+          <ion-text>
+            <p><strong>Genres:</strong>
+              <span *ngFor="let genre of movie.genres">
+                {{genre}}
+              </span>
+            </p>
+          </ion-text>
+          <ion-text>
+            <p><strong>Overview:</strong> {{movie.overview}}</p>
+          </ion-text>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div class="slides">
+    <ion-slides [options]="slideOpts">
+      <ion-slide *ngFor="let movie of recommended">
+        <ion-img [src]="movie.photo"></ion-img>
+      </ion-slide>
+    </ion-slides>
+    <div class="recommend-container">
+        <div class="recommend">Recommendations</div>
+    </div>
+  </div>
+</ion-content>

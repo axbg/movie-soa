@@ -4,11 +4,12 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: 'app',
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'profile',
+        loadChildren: '../tab1/tab1.module#Tab1PageModule',
         children: [
           {
             path: '',
@@ -17,7 +18,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab2',
+        path: 'main',
         children: [
           {
             path: '',
@@ -26,24 +27,19 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'tab3',
-        children: [
-          {
-            path: '',
-            loadChildren: '../tab3/tab3.module#Tab3PageModule'
-          }
-        ]
+        path: 'collection',
+        loadChildren: '../tab3/tab3.module#Tab3PageModule'
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/app/main',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/app/main',
     pathMatch: 'full'
   }
 ];
