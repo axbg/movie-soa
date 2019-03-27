@@ -9,8 +9,7 @@ import { RouterLink, Router } from '@angular/router';
 export class MovieListComponent implements OnInit {
 
   @Input()
-  movies: [];
-
+  movies: Object[];
   constructor(private router: Router) {
   }
 

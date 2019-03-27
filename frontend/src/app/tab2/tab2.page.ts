@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
 
   private searchText: String = "";
-  private movies = [];
-  private loaded: Boolean = false;
+  private movies: Object[] = [];
+  private loaded: Boolean = true;
 
   constructor() {
     this.movies = [
@@ -28,6 +28,9 @@ export class Tab2Page {
         "id": 12
       }
     ]
+  }
+
+  ngOnInit() {
   }
 
   dispatchSearch() {

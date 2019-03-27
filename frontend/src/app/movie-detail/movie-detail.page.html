@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-button (click)="navigateBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>movieDetail</ion-title>
   </ion-toolbar>
@@ -43,12 +45,12 @@
   </div>
   <div class="slides">
     <ion-slides [options]="slideOpts">
-      <ion-slide *ngFor="let movie of recommended">
+      <ion-slide *ngFor="let movie of recommended; let index;" (click)="openRecommendation(index)">
         <ion-img [src]="movie.photo"></ion-img>
       </ion-slide>
     </ion-slides>
     <div class="recommend-container">
-        <div class="recommend">Recommendations</div>
+      <div class="recommend">Recommendations</div>
     </div>
   </div>
 </ion-content>

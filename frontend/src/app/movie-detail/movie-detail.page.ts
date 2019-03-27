@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-detail',
@@ -11,11 +12,11 @@ export class MovieDetailPage implements OnInit {
   movie: any = {};
   recommended: Object[];
   slideOpts = {
-    slidesPerView: 3,
-    spaceBetween: 10
+    slidesPerView: 2.6,
+    spaceBetween: 15
   }
 
-  constructor() {
+  constructor(private router: Router) {
     this.movie = {
       "name": "Avengers",
       "photo": "https://upload.wikimedia.org/wikipedia/en/8/85/Captain_Marvel_poster.jpg",
@@ -84,8 +85,16 @@ export class MovieDetailPage implements OnInit {
     return this.movie.added ? "-" : "+";
   }
 
-  changeCollectionStatus(){
+  changeCollectionStatus() {
     this.movie.added = !this.movie.added;
+  }
+
+  navigateBack() {
+    window.history.back();
+  }
+
+  openRecommendation(element) {
+    this.router.navigateByUrl("/movie/" + element.id);
   }
 
 }

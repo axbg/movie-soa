@@ -1,5 +1,5 @@
 <div>
-  <ion-card class="custom-card" *ngFor="let movie of movies; let index;" (click)="renderMovie(index)">
+  <ion-card *ngFor="let movie of movies; let index;" (click)="renderMovie(index)">
     <ion-card-header class="custom-header">
       <ion-img class="custom-img" [src]="movie.photo"></ion-img>
     </ion-card-header>
