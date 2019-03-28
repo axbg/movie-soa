@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,14 +7,15 @@ import { Router } from '@angular/router';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  private user : Object = {username: "Alex"}
+  private user: Object = { "username": "" };
 
-  constructor(private router: Router){
-
+  constructor(private router: Router) {
+    this.user["username"] = window.localStorage.getItem("username");
   }
 
-  logout(){
-    //clean token from localStorage
-    this.router.navigateByUrl("/login");
+  logout() {
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("username");
+    this.router.navigateByUrl("");
   }
 }

@@ -1,0 +1,30 @@
+ion-content {
+    overflow-y: hidden;
+}
+
+ion-button {
+    margin-top: 5vh;
+}
+
+ion-card {
+    background-color: white;
+}
+
+ion-title {
+    font-size: 20px;
+    margin-top: 2vh;
+}
+
+.container {
+    height: 100%;
+    padding-top: 20vh;
+    background-size: cover !important;
+    background-repeat: none !important;
+}
+
+.login-container{
+    text-align: center;
+    margin: 0 auto;
+    width: 90%;
+    background-color: transparent;
+}
