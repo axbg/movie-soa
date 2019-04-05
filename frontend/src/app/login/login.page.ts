@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpManagerService } from '../http-manager.service';
+import { ISoapMethodResponse } from 'ngx-soap';
 
 @Component({
   selector: 'app-login',
@@ -30,16 +31,19 @@ export class LoginPage implements OnInit {
       this.displayLogin = true;
     }
     */
-   
   }
 
   public dispatchLogin() {
-    this.http.get("https://jsonplaceholder.typicode.com/todos/1")
-      .subscribe(response => {
-        window.localStorage.setItem("token", "asdasdasd");
-        window.localStorage.setItem("username", this.form.value.username);
-        this.router.navigateByUrl("/app/main");
-      })
+     const body = {
+       "sch:user": {
+        "sch:username": "alexb",
+        "sch:password": "alex12344"
+       }
+    };
+
+     (<any>this.httpManager.client).login(body).subscribe((res: ISoapMethodResponse) => {
+       console.log(res.result);
+     })
   }
 
 }

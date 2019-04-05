@@ -1,4 +1,3 @@
-This XML file does not appear to have any style information associated with it. The document tree is shown below.
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
     xmlns:sch="http://movies-soa.com/app" 
     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 

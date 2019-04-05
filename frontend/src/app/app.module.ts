@@ -13,12 +13,15 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms';
 
+import { NgxSoapModule } from 'ngx-soap';
+
 
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule,
+  NgxSoapModule],
   providers: [
     StatusBar,
     SplashScreen,
