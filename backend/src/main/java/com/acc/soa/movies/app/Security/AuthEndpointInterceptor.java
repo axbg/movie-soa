@@ -5,13 +5,15 @@ import com.acc.soa.movies.app.Entities.UserMeta;
 import com.acc.soa.movies.app.Repositories.UserMetaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ws.WebServiceMessage;
 import org.springframework.ws.client.WebServiceFaultException;
 import org.springframework.ws.context.MessageContext;
 import org.springframework.ws.server.EndpointInterceptor;
 import org.springframework.ws.server.endpoint.MethodEndpoint;
 import org.springframework.ws.soap.SoapHeader;
 import org.springframework.ws.soap.SoapMessage;
+import org.springframework.ws.transport.context.TransportContext;
+import org.springframework.ws.transport.context.TransportContextHolder;
+import org.springframework.ws.transport.http.HttpServletConnection;
 import org.w3c.dom.Node;
 
 import javax.xml.transform.Source;
@@ -29,9 +31,13 @@ public class AuthEndpointInterceptor implements EndpointInterceptor {
 
         MethodEndpoint endpoint = (MethodEndpoint) o;
 
+        TransportContext ctx = TransportContextHolder.getTransportContext();
+        HttpServletConnection connection = (HttpServletConnection)ctx.getConnection();
+
         if (endpoint.getMethod().getDeclaringClass() != AuthEndpoint.class) {
+
             SoapHeader header =
-                    ((SoapMessage) ((WebServiceMessage) messageContext.getRequest())).getSoapHeader();
+                    ((SoapMessage)(messageContext.getRequest())).getSoapHeader();
 
             Source bodySource = header.getSource();
             DOMSource bodyDomSource = (DOMSource) bodySource;

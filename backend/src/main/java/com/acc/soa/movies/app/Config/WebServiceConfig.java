@@ -1,7 +1,7 @@
 package com.acc.soa.movies.app.Config;
 
 import com.acc.soa.movies.app.Security.AuthEndpointInterceptor;
-import org.apache.wss4j.common.WSS4JConstants;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
-import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
@@ -20,22 +19,35 @@ import java.util.List;
 @EnableWs
 @Configuration
 public class WebServiceConfig extends WsConfigurerAdapter {
+
+    @Bean
+    public FilterRegistrationBean filterRegistrationBean(){
+        CORSFilter filter = new CORSFilter();
+
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.addUrlPatterns("/*");
+        registration.setFilter(filter);
+        registration.setOrder(1);
+
+        return registration;
+    }
+
     @Bean
     public ServletRegistrationBean messageDispatcherServlet(ApplicationContext applicationContext) {
+
         MessageDispatcherServlet servlet = new MessageDispatcherServlet();
         servlet.setApplicationContext(applicationContext);
         servlet.setTransformWsdlLocations(true);
         return new ServletRegistrationBean(servlet, "/ws/*");
     }
 
-
     @Bean
-    public AuthEndpointInterceptor authEndpointInterceptor(){
+    public AuthEndpointInterceptor authEndpointInterceptor() {
         return new AuthEndpointInterceptor();
     }
 
     @Override
-    public void addInterceptors(List interceptors){
+    public void addInterceptors(List interceptors) {
         interceptors.add(authEndpointInterceptor());
     }
 
