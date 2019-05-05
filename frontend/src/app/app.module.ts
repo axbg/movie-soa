@@ -21,7 +21,7 @@ import { NgxSoapModule } from 'ngx-soap';
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule, HttpClientModule,
-  NgxSoapModule],
+    NgxSoapModule],
   providers: [
     StatusBar,
     SplashScreen,

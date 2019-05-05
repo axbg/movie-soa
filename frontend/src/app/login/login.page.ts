@@ -32,26 +32,26 @@ export class LoginPage implements OnInit {
   }
 
   public dispatchLogin() {
-     const body = {
-       "sch:user": {
+    const body = {
+      "sch:user": {
         "sch:username": this.form.value.username, //alexb
         "sch:password": this.form.value.password //"alex12344"
-       }
+      }
     };
 
-     (<any>this.httpManager.client).login(body).subscribe(
+    (<any>this.httpManager.client).login(body).subscribe(
       async (res: ISoapMethodResponse) => {
         await window.localStorage.setItem("token", res.result.authenticatedUser.token);
         await window.localStorage.setItem("username", res.result.authenticatedUser.username);
         this.router.navigateByUrl("/app/main");
-        }, 
+      },
       async () => {
         const loader = await this.toastController.create({
           message: 'Credentials are not correct.',
           duration: 2000,
           position: "top"
         });
-    
+
         loader.present();
       })
   }

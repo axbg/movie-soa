@@ -11,16 +11,16 @@ import { ISoapMethodResponse } from 'ngx-soap';
 export class Tab3Page {
 
   private movies: Object[] = [];
-  private loaded : Boolean = true;
+  private loaded: Boolean = true;
 
   constructor(private router: Router, private httpManager: HttpManagerService) {
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.loadCollection();
   }
 
-  loadCollection(){
+  loadCollection() {
     (<any>this.httpManager.client).getPersonalMovies({}).subscribe(
       (res: ISoapMethodResponse) => {
         this.movies = res.result.meta_movie.map(movie => {
@@ -33,7 +33,7 @@ export class Tab3Page {
     )
   }
 
-  openMovie(element){
+  openMovie(element) {
     this.router.navigateByUrl("/movie/" + element.id);
   }
 }

@@ -32,11 +32,11 @@ export class MovieDetailPage implements OnInit {
   }
 
   modifyLoaded() {
-    if(this.movieLoaded && this.recommendationsLoaded){
+    if (this.movieLoaded && this.recommendationsLoaded) {
       this.loaded = true;
     }
   }
-  
+
   getMovieDetail() {
     const body = {
       "sch:movie_id": this.currentId

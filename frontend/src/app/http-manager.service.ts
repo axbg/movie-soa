@@ -7,9 +7,9 @@ import { NgxSoapService, Client, ISoapMethodResponse } from 'ngx-soap';
 export class HttpManagerService {
 
   client: Client;
-  
+
   constructor(private soap: NgxSoapService) {
-    
+
     var wsdlOptions = {
       "overrideRootElement": {
         "namespace": "sch",
@@ -21,7 +21,7 @@ export class HttpManagerService {
     };
 
     this.soap.createClient('/assets/movies.wsdl', wsdlOptions)
-    .then(client => { this.client = client; })
+      .then(client => { this.client = client; })
   }
 
   addAuthHeader() {

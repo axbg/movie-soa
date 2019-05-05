@@ -10,13 +10,13 @@
 </ion-header>
 
 <ion-content>
-    <div *ngIf="loaded; then mov; else spin"></div>
+  <div *ngIf="loaded; then mov; else spin"></div>
 </ion-content>
 
 <ng-template #spin>
-    <div class="spinner">
-      <ion-spinner name="dots"></ion-spinner>
-    </div>
+  <div class="spinner">
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
 </ng-template>
 
 <ng-template #mov>

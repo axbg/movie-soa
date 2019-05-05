@@ -13,7 +13,7 @@ export class Tab2Page implements OnInit {
   private searchText: String = "";
   private movies: Object[] = [];
   private loaded: Boolean = false;
-  private loadInterval;
+  private loadInterval: any;
 
   constructor(private httpManager: HttpManagerService, private toastController: ToastController) {
   }

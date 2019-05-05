@@ -10,6 +10,7 @@ export class MovieListComponent implements OnInit {
 
   @Input()
   movies: Object[];
+  
   constructor(private router: Router) {
   }
 
