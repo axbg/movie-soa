@@ -10,6 +10,16 @@
 </ion-header>
 
 <ion-content>
+    <div *ngIf="loaded; then mov; else spin"></div>
+</ion-content>
+
+<ng-template #spin>
+    <div class="spinner">
+      <ion-spinner name="dots"></ion-spinner>
+    </div>
+</ng-template>
+
+<ng-template #mov>
   <div class="movie-container">
     <div class="poster">
       <ion-img class="photo" [src]="movie.photo"></ion-img>
@@ -21,7 +31,7 @@
       <ion-card-content>
         <div class="info">
           <ion-text>
-            <p><strong>Title:</strong> {{movie.name}}</p>
+            <p><strong>Title:</strong> {{movie.title}}</p>
           </ion-text>
           <ion-text>
             <p><strong>Rating:</strong> {{movie.rating}}⭐</p>
@@ -37,7 +47,7 @@
             </p>
           </ion-text>
           <ion-text>
-            <p><strong>Overview:</strong> {{movie.overview}}</p>
+            <p><strong>Overview:</strong> {{movie.tagline}}</p>
           </ion-text>
         </div>
       </ion-card-content>
@@ -53,4 +63,4 @@
       <div class="recommend">Recommendations</div>
     </div>
   </div>
-</ion-content>
+</ng-template>
