@@ -23,4 +23,10 @@ export class HttpManagerService {
     this.soap.createClient('/assets/movies.wsdl', wsdlOptions)
     .then(client => { this.client = client; })
   }
+
+  addAuthHeader() {
+    this.client.addSoapHeader({
+      token: window.localStorage.getItem("token")
+    });
+  }
 }
