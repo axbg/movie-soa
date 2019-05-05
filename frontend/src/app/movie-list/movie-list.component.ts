@@ -17,7 +17,7 @@ export class MovieListComponent implements OnInit {
   }
 
   renderMovie(element) {
-    this.router.navigateByUrl("/movie/" + element.id);
+    this.router.navigateByUrl("/movie/" + element.movie_id);
   }
 
 }

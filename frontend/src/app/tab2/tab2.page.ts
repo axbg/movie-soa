@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpManagerService } from '../http-manager.service';
+import { ISoapMethodResponse } from 'ngx-soap';
 
 @Component({
   selector: 'app-tab2',
@@ -9,28 +11,41 @@ export class Tab2Page implements OnInit {
 
   private searchText: String = "";
   private movies: Object[] = [];
-  private loaded: Boolean = true;
+  private loaded: Boolean = false;
+  private loadInterval;
 
-  constructor() {
-    this.movies = [
-      {
-        "name": "Avengers",
-        "photo": "https://upload.wikimedia.org/wikipedia/en/8/85/Captain_Marvel_poster.jpg",
-        "overview": "overview",
-        "rating": 3,
-        "id": 5
-      },
-      {
-        "name": "Captain Marvel",
-        "photo": "https://upload.wikimedia.org/wikipedia/en/8/85/Captain_Marvel_poster.jpg",
-        "overview": "overview",
-        "rating": 5,
-        "id": 12
-      }
-    ]
+  constructor(private httpManager: HttpManagerService) {
   }
 
   ngOnInit() {
+    this.loadInterval = setInterval(() => {
+      if(this.checkLoaded){
+        clearInterval(this.loadInterval);
+        this.httpManager.addAuthHeader();
+        this.getPopularMovies();
+      }
+    }, 1000);
+  }
+
+  checkLoaded() {
+    return this.httpManager.client ? true : false;
+  }
+
+  shortenMoviesTagline() {
+    this.movies = this.movies.map(movie => {
+      movie["tagline"] = movie["tagline"].length > 100 ? movie["tagline"].slice(0,100) + "..." : movie["tagline"];
+      return movie;
+    });
+  }
+
+  getPopularMovies() {
+    (<any>this.httpManager.client).getPopularMovie({}).subscribe(
+      (res: ISoapMethodResponse) => {
+        this.movies = res.result.movies.movie;
+        this.shortenMoviesTagline();
+        this.loaded = true;
+      }
+    )
   }
 
   dispatchSearch() {
