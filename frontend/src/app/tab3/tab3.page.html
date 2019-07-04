@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Collection
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="loaded; then mov; else spin">
+  </div>
+</ion-content>
+
+<ng-template #mov>
+  <ion-list class="custom-list">
+    <ion-item class="ion-activatable" *ngFor="let movie of movies; let index;" (click)="openMovie(index)">
+      <ion-ripple-effect></ion-ripple-effect>
+      <ion-label>{{movie.name}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ng-template>
+
+<ng-template #spin>
+  <div class="spinner">
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
+</ng-template>

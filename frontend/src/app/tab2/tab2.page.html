@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="custom-title">
+      Freshest Movies
+      <i class="refresh-icon" (click)="getPopularMovies()">↻</i>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar animated placeholder="Search your movie" [(ngModel)]="searchText" (change)="dispatchSearch()">
+  </ion-searchbar>
+  <div *ngIf="loaded; then mov; else spin">
+  </div>
+</ion-content>
+
+<ng-template #mov>
+  <app-movie-list [movies]="movies"></app-movie-list>
+</ng-template>
+<ng-template #spin>
+  <div class="spinner">
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
+</ng-template>

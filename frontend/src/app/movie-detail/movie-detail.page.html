@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="navigateBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>movieDetail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="loaded; then mov; else spin"></div>
+</ion-content>
+
+<ng-template #spin>
+  <div class="spinner">
+    <ion-spinner name="dots"></ion-spinner>
+  </div>
+</ng-template>
+
+<ng-template #mov>
+  <div class="movie-container">
+    <div class="poster">
+      <ion-img class="photo" [src]="movie.photo"></ion-img>
+    </div>
+    <ion-fab class="custom-fab" (click)="changeCollectionStatus()">
+      <ion-fab-button>{{isAdded()}}</ion-fab-button>
+    </ion-fab>
+    <ion-card>
+      <ion-card-content>
+        <div class="info">
+          <ion-text>
+            <p><strong>Title:</strong> {{movie.title}}</p>
+          </ion-text>
+          <ion-text>
+            <p><strong>Rating:</strong> {{movie.rating}}⭐</p>
+          </ion-text>
+          <ion-text>
+            <p><strong>Year</strong>: {{movie.year}}</p>
+          </ion-text>
+          <ion-text>
+            <p><strong>Genres:</strong>
+              <span *ngFor="let genre of movie.genres">
+                {{genre}}
+              </span>
+            </p>
+          </ion-text>
+          <ion-text>
+            <p><strong>Overview:</strong> {{movie.tagline}}</p>
+          </ion-text>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div class="slides">
+    <ion-slides [options]="slideOpts">
+      <ion-slide *ngFor="let movie of recommended; let index;" (click)="openRecommendation(index)">
+        <ion-img [src]="movie.photo"></ion-img>
+      </ion-slide>
+    </ion-slides>
+    <div class="recommend-container">
+      <div class="recommend">Recommendations</div>
+    </div>
+  </div>
+</ng-template>

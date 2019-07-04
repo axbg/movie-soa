@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img src="/assets/profile/background.jpg"></ion-img>
+  <ion-img class="profile-photo" src="/assets/profile/contact.png"></ion-img>
+  <ion-card-content>
+    <div class="profile">
+      <div class="profile-element">
+        <h1>{{user.username}}</h1>
+      </div>
+      <ion-button (click)="logout()">Logout</ion-button>
+    </div>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Other Resources</ion-label>
+      </ion-list-header>
+      <ion-item href="https://imdb.com">
+        <ion-icon slot="start" color="medium" name="videocam"></ion-icon>
+        <ion-label>IMDB</ion-label>
+      </ion-item>
+      <ion-item href="https://themoviedb.org">
+        <ion-icon slot="start" color="medium" name="analytics"></ion-icon>
+        <ion-label>TMDb</ion-label>
+      </ion-item>
+      <ion-item href="https://rottentomatoes.com">
+        <ion-icon slot="start" color="medium" name="trending-up"></ion-icon>
+        <ion-label>Rotten Tomatoes</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card-content>
+
+</ion-content>

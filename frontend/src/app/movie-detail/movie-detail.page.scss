@@ -1,0 +1,53 @@
+.spinner {
+  text-align: center;
+  margin-top: 20vh;
+}
+
+.movie-container {
+  padding: 5px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.poster {
+  max-height: 40vh;
+  min-width: 100%;
+  overflow-y: scroll;
+}
+
+.photo {
+  height: 100%;
+  object-fit: cover;
+  object-position: 0 0;
+}
+
+.info {
+  min-width: 100%;
+  text-align: left;
+  font-size: 20px;
+}
+
+.custom-fab {
+  position: absolute;
+  right: 0;
+  margin-right: 10px;
+  margin-top: -4vh;
+}
+
+.slides {
+  padding-right: 5px;
+  padding-left: 5px;
+  background-color: black;
+}
+
+.recommend-container {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.recommend {
+  background-color: black;
+  color: whitesmoke;
+  text-align: center;
+  width: 100%;
+}

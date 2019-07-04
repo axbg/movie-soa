@@ -1,0 +1,298 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:sch="http://movies-soa.com/app" 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:tns="http://movies-soa.com/app" targetNamespace="http://movies-soa.com/app">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://movies-soa.com/app">
+            <!-- - types  -->
+            <xs:complexType name="meta_movie">
+                <xs:sequence>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="tnmb" type="xs:integer"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="movie">
+                <xs:sequence>
+                    <xs:element name="movie_id" type="xs:integer"/>
+                    <xs:element name="title" type="xs:string"/>
+                    <xs:element name="tagline" type="xs:string"/>
+                    <xs:element name="year" type="xs:integer"/>
+                    <xs:element name="photo" type="xs:string"/>
+                    <xs:element name="rating" type="xs:float"/>
+                    <xs:element name="director" type="xs:string"/>
+                    <xs:element name="genres">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" name="genre" type="xs:string"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="actors">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" name="actor" type="xs:string"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="authenticatedUser">
+                <xs:sequence>
+                    <xs:element name="username" type="xs:string"/>
+                    <xs:element name="id" type="xs:integer"/>
+                    <xs:element name="token" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="user">
+                <xs:sequence>
+                    <xs:element name="username" type="xs:string"/>
+                    <xs:element name="password" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <!-- elements -->
+            <xs:element name="movie" type="tns:movie"/>
+            <xs:element name="meta_movie" type="tns:meta_movie"/>
+            <xs:element name="movies">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="movie" type="tns:movie"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="user" type="tns:user"/>
+            <xs:element name="authenticatedUser" type="tns:authenticatedUser"/>
+            <!-- SOAP Actions  -->
+            <!--  works as register request also  -->
+            <xs:element name="loginRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="user" type="tns:user"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="loginResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="authenticatedUser" type="tns:authenticatedUser"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getMovieByIdRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="movie_id" type="xs:integer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getMovieByIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="tns:movie"/>
+                        <xs:element name="added" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getMoviesByNameRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="title" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getMoviesByNameResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="tns:movies"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPopularMovieRequest"/>
+            <xs:element name="getPopularMovieResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="tns:movies"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="saveMovieToCollectionRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="movie_id" type="xs:integer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="saveMovieToCollectionResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="added" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPersonalMoviesRequest"/>
+            <xs:element name="getPersonalMoviesResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" ref="tns:meta_movie"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getRecommendationsRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="movie_id" type="xs:integer"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getRecommendationsResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="tns:movies"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getPersonalMoviesRequest">
+        <wsdl:part element="tns:getPersonalMoviesRequest" name="getPersonalMoviesRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMovieByIdResponse">
+        <wsdl:part element="tns:getMovieByIdResponse" name="getMovieByIdResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getRecommendationsRequest">
+        <wsdl:part element="tns:getRecommendationsRequest" name="getRecommendationsRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMovieByIdRequest">
+        <wsdl:part element="tns:getMovieByIdRequest" name="getMovieByIdRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getPopularMovieRequest">
+        <wsdl:part element="tns:getPopularMovieRequest" name="getPopularMovieRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getPersonalMoviesResponse">
+        <wsdl:part element="tns:getPersonalMoviesResponse" name="getPersonalMoviesResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getRecommendationsResponse">
+        <wsdl:part element="tns:getRecommendationsResponse" name="getRecommendationsResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMoviesByNameResponse">
+        <wsdl:part element="tns:getMoviesByNameResponse" name="getMoviesByNameResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="saveMovieToCollectionResponse">
+        <wsdl:part element="tns:saveMovieToCollectionResponse" name="saveMovieToCollectionResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMoviesByNameRequest">
+        <wsdl:part element="tns:getMoviesByNameRequest" name="getMoviesByNameRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="saveMovieToCollectionRequest">
+        <wsdl:part element="tns:saveMovieToCollectionRequest" name="saveMovieToCollectionRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="loginRequest">
+        <wsdl:part element="tns:loginRequest" name="loginRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getPopularMovieResponse">
+        <wsdl:part element="tns:getPopularMovieResponse" name="getPopularMovieResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="loginResponse">
+        <wsdl:part element="tns:loginResponse" name="loginResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="MoviesPort">
+        <wsdl:operation name="getPersonalMovies">
+            <wsdl:input message="tns:getPersonalMoviesRequest" name="getPersonalMoviesRequest"></wsdl:input>
+            <wsdl:output message="tns:getPersonalMoviesResponse" name="getPersonalMoviesResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMovieById">
+            <wsdl:input message="tns:getMovieByIdRequest" name="getMovieByIdRequest"></wsdl:input>
+            <wsdl:output message="tns:getMovieByIdResponse" name="getMovieByIdResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getRecommendations">
+            <wsdl:input message="tns:getRecommendationsRequest" name="getRecommendationsRequest"></wsdl:input>
+            <wsdl:output message="tns:getRecommendationsResponse" name="getRecommendationsResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPopularMovie">
+            <wsdl:input message="tns:getPopularMovieRequest" name="getPopularMovieRequest"></wsdl:input>
+            <wsdl:output message="tns:getPopularMovieResponse" name="getPopularMovieResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMoviesByName">
+            <wsdl:input message="tns:getMoviesByNameRequest" name="getMoviesByNameRequest"></wsdl:input>
+            <wsdl:output message="tns:getMoviesByNameResponse" name="getMoviesByNameResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="saveMovieToCollection">
+            <wsdl:input message="tns:saveMovieToCollectionRequest" name="saveMovieToCollectionRequest"></wsdl:input>
+            <wsdl:output message="tns:saveMovieToCollectionResponse" name="saveMovieToCollectionResponse"></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="login">
+            <wsdl:input message="tns:loginRequest" name="loginRequest"></wsdl:input>
+            <wsdl:output message="tns:loginResponse" name="loginResponse"></wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="MoviesPortSoap11" type="tns:MoviesPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getPersonalMovies">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getPersonalMoviesRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getPersonalMoviesResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMovieById">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getMovieByIdRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getMovieByIdResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getRecommendations">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getRecommendationsRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getRecommendationsResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPopularMovie">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getPopularMovieRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getPopularMovieResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMoviesByName">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="getMoviesByNameRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getMoviesByNameResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="saveMovieToCollection">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="saveMovieToCollectionRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="saveMovieToCollectionResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="login">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="loginRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="loginResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="MoviesPortService">
+        <wsdl:port binding="tns:MoviesPortSoap11" name="MoviesPortSoap11">
+            <soap:address location="http://localhost:8080/ws"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
